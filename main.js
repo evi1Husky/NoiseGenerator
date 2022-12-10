@@ -12,21 +12,22 @@ let oscilloscope = new Oscilloscope();
 
 playButton.onclick = () => {
   noise = new NoiseGenerator(noiseType);
+  oscilloscope = new Oscilloscope(noise.analyserNode);
   noise.amplitude = volume.value;
   noise.play();
-  oscilloscope = new Oscilloscope(noise.analyserNode);
   oscilloscope.start();
   playButton.style.display = 'none';
   stopButton.style.display = 'block';
-};
+}
 
 stopButton.onclick = () => {
   noise.stop();
   oscilloscope.idle();
   noise = null;
+  oscilloscope = null;
   playButton.style.display = 'block';
   stopButton.style.display = 'none';
-};
+}
 
 for (let button of noiseButtons) {
   button.onclick = () => {
@@ -35,7 +36,7 @@ for (let button of noiseButtons) {
       stopButton.click();
       playButton.click();
     }
-  };
+  }
 }
 
 volume.oninput = () => {
