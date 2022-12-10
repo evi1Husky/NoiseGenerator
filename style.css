@@ -1,0 +1,52 @@
+*,
+*::before,
+*::after {margin: 0; padding: 0; box-sizing: inherit;}
+
+html {
+  font-size: 62.5%;
+  font-family: 'Andale Mono', monospace, "Arial", sans-serif;
+}
+
+body {
+  box-sizing: border-box;
+  font-size: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background:black;
+}
+
+canvas {
+  border: 1px solid #4a505a;
+  border-radius: 1.5rem;
+  width: 500px;
+  height: 230px;
+}
+
+@media (max-width:420px) {
+  canvas {
+    width: 350px;
+    height: 200px;
+  }
+}
+
+button {
+  width: 8rem;
+  height: 3rem;
+  background: rgb(0, 0, 0);
+  color: gray;
+  font-size: 2rem;
+  border: none;
+}
+
+.stop-button {
+  display: none;
+}
+
+.volume {
+  margin: 3rem;
+  width: 30rem;
+}
