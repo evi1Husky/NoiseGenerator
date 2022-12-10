@@ -22,7 +22,7 @@ playButton.onclick = () => {
 
 stopButton.onclick = () => {
   noise.stop();
-  oscilloscope.idle();
+  oscilloscope.stop();
   noise = null;
   oscilloscope = null;
   playButton.style.display = 'block';

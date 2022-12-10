@@ -10,13 +10,12 @@ class Oscilloscope {
     this.canvasContext.strokeStyle = "#00ff04";
     this.canvasContext.lineWidth = 1.9;
     this.suspended = true;
-    try {
+    if(analyserNode) {
       this.analyserNode = analyserNode;
       this.numberOfValues = this.analyserNode.frequencyBinCount;
       this.waveformData = new Uint8Array(this.numberOfValues);
-    } catch (error) {
-      this.idle()
     }
+    this.idle();
   }
 
   idle() {
@@ -28,6 +27,10 @@ class Oscilloscope {
     this.canvasContext.stroke();
   }
 
+  stop() {
+    this.suspended = true;
+  }
+
   start() {
     this.suspended = false;
     this.draw()
@@ -36,6 +39,7 @@ class Oscilloscope {
   draw() {
     if (this.suspended) {
       window.cancelAnimationFrame(this.draw.bind(this));
+      this.idle();
       return;
     }
     window.requestAnimationFrame(this.draw.bind(this));
