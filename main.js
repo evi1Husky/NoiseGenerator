@@ -4,18 +4,18 @@ import NoiseGenerator from './NoiseGenerator.js';
 const playButton = document.querySelector('.play-button');
 const stopButton = document.querySelector('.stop-button');
 const volume = document.querySelector('.volume');
+const noiseButtons = document.querySelectorAll('.noise-button');
 
+let noiseType = 'white';
 let noise = null;
 let oscilloscope = new Oscilloscope();
 
 playButton.onclick = () => {
-  // noise = new NoiseGenerator('white');
-  // noise = new NoiseGenerator('pink');
-  noise = new NoiseGenerator('brown');
+  noise = new NoiseGenerator(noiseType);
   noise.amplitude = volume.value;
   noise.play();
   oscilloscope = new Oscilloscope(noise.analyserNode);
-  oscilloscope.start()
+  oscilloscope.start();
   playButton.style.display = 'none';
   stopButton.style.display = 'block';
 };
@@ -23,9 +23,20 @@ playButton.onclick = () => {
 stopButton.onclick = () => {
   noise.stop();
   oscilloscope.idle();
+  noise = null;
   playButton.style.display = 'block';
   stopButton.style.display = 'none';
 };
+
+for (let button of noiseButtons) {
+  button.onclick = () => {
+    noiseType = button.id;
+    if (noise) {
+      stopButton.click();
+      playButton.click();
+    }
+  };
+}
 
 volume.oninput = () => {
   if (noise) {

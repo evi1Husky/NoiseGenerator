@@ -22,7 +22,7 @@ body {
 main {
   color: #b2b2b6;
   width: 55rem;
-  height: 50rem;
+  height: 55rem;
   border: 0.5px solid #4a505a;
   border-radius: 1rem;
   background: #24272d;
@@ -30,6 +30,11 @@ main {
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
 }
 
 canvas {
@@ -111,6 +116,12 @@ input::-webkit-slider-thumb:active {
   background-color: #fafaff;
 }
 
+input::-webkit-slider-thumb:active {
+  height: 1.4rem;
+  width: 1.4rem;
+  border-radius: 1.4rem;
+}
+
 .noise-buttons {
   margin-top: 2rem;
   display: flex;
@@ -128,10 +139,69 @@ input::-webkit-slider-thumb:active {
   main {
     width: 99.5%;
     height: 99.5%;
+    justify-content: center;
   }
 
   canvas {
-    width: 350px;
+    width: 400px;
     height: 200px;
+    margin-bottom: 2rem;
+  }
+
+  h1 {
+    font-size: 2.8rem;
+    margin-bottom: 7rem;
+  }
+
+  .volume {
+    margin-top: 4rem;
+  }
+
+  .stop-button,
+  .play-button {
+    margin-top: 3.5rem;
+    width: 7rem;
+    height: 7rem;
+    border-radius: 7rem;
+  }
+}
+
+@media (max-height:915px) and (max-width:420px) {
+  canvas {
+    width: 390px;
+  }
+}
+
+@media (max-height:860px) and (max-width:420px) {
+  canvas {
+    width: 360px;
+  }
+}
+
+@media (max-height:760px) and (max-width:370px) {
+  canvas {
+    width: 350px;
+  }
+}
+
+@media (max-height:736px) and (max-width:420px) {
+  canvas {
+    width: 400px;
+  }
+}
+
+@media (max-height:670px) and (max-width:420px) {
+  canvas {
+    width: 350px;
+  }
+
+  h1 {
+    margin-bottom: 3.5rem;
+  }
+}
+
+@media (max-width:320px) {
+  canvas {
+    width: 300px;
   }
 }
