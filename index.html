@@ -12,11 +12,18 @@
   <title></title>
 </head>
   <body>
-    <canvas id="oscilloscope"></canvas>
-    <input type="range" class="volume" min="0" max="1"
-    value="0.2" step="0.0001">
-    <button class="play-button">play</button>
-    <button class="stop-button">stop</button>
-    <script type="module" src="main.js"></script>
+    <main>
+      <canvas id="oscilloscope"></canvas>
+      <div class="noise-buttons">
+        <button class="noise-button" id="white">white</button>
+        <button class="noise-button" id="pink">pink</button>
+        <button class="noise-button" id="brown">brown</button>
+      </div>
+      <input type="range" class="volume" min="0" max="1"
+      value="0.2" step="0.0001">
+      <button class="play-button">play</button>
+      <button class="stop-button">stop</button>
+      <script type="module" src="main.js"></script>
+    </main>
   </body>
 </html>

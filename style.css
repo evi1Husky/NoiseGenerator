@@ -11,12 +11,25 @@ body {
   box-sizing: border-box;
   font-size: 1.6rem;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center; 
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background:black;
+  background: #1b1d21;
+}
+
+main {
+  color: #b2b2b6;
+  width: 55rem;
+  height: 50rem;
+  border: 0.5px solid #4a505a;
+  border-radius: 1rem;
+  background: #24272d;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 canvas {
@@ -26,19 +39,47 @@ canvas {
   height: 230px;
 }
 
-@media (max-width:420px) {
-  canvas {
-    width: 350px;
-    height: 200px;
-  }
+button {
+  color: #24272d;
+  font-family: 'Andale Mono', monospace, "Arial", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  background-color: #b6b6ba;
+  border: none;
 }
 
-button {
-  width: 8rem;
-  height: 3rem;
-  background: rgb(0, 0, 0);
-  color: gray;
-  font-size: 2rem;
+input {
+  color: #1b1d21;
+  font-family: 'Andale Mono', monospace, "Arial", sans-serif;
+  appearance: none;
+  background: #b6b6ba;
+  height: 0.3rem;
+  border-radius: 1rem;
+  border: none;
+  outline: none;
+  width: 70%;
+  margin-bottom: 3rem;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -webkit-border-radius: 1rem;
+  height: 1.3rem;
+  width: 1.3rem;
+  border-radius: 1rem;
+  background: #b9b9bd;
+  border: none;
+}
+
+input[type="range"]::-moz-range-thumb {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -moz-border-radius: 1rem;
+  height: 1.3rem;
+  width: 1.3rem;
+  border-radius: 1rem;
+  background: #b9b9bd;
   border: none;
 }
 
@@ -46,7 +87,51 @@ button {
   display: none;
 }
 
+.stop-button,
+.play-button {
+  margin-bottom: 3.5rem;
+  width: 5.7rem;
+  height: 5.7rem;
+  border-radius: 5.7rem;
+}
+
 .volume {
-  margin: 3rem;
+  margin-top: 2rem;
   width: 30rem;
+}
+
+button:hover,
+input:hover,
+input::-webkit-slider-thumb:hover {
+  background-color: #dedee3;
+}
+
+button:active,
+input::-webkit-slider-thumb:active {
+  background-color: #fafaff;
+}
+
+.noise-buttons {
+  margin-top: 2rem;
+  display: flex;
+}
+
+.noise-button {
+  margin: 1.5rem;
+  border-radius: 1rem;
+  width: 7.5rem;
+  height: 2.7rem;
+  font-size: 1.4rem;
+}
+
+@media (max-width:420px) {
+  main {
+    width: 99.5%;
+    height: 99.5%;
+  }
+
+  canvas {
+    width: 350px;
+    height: 200px;
+  }
 }
