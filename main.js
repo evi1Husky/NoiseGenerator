@@ -9,7 +9,9 @@ let noise = null;
 let oscilloscope = new Oscilloscope();
 
 playButton.onclick = () => {
-  noise = new NoiseGenerator();
+  // noise = new NoiseGenerator('white');
+  // noise = new NoiseGenerator('pink');
+  noise = new NoiseGenerator('brown');
   noise.amplitude = volume.value;
   noise.play();
   oscilloscope = new Oscilloscope(noise.analyserNode);
