@@ -157,7 +157,7 @@ input::-webkit-slider-thumb:active {
 
   .stop-button,
   .play-button {
-    margin-top: 3rem;
+    margin-top: 2rem;
     width: 7rem;
     height: 7rem;
     border-radius: 7rem;
@@ -166,7 +166,7 @@ input::-webkit-slider-thumb:active {
 
 @media (max-height:670px) and (max-width:420px) {
   h1 {
-    margin-bottom: 4.7rem;
+    margin-bottom: 5rem;
     margin-top: 3rem;
   }
 }
