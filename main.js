@@ -8,11 +8,15 @@ const noiseButtons = document.querySelectorAll('.noise-button');
 
 let noiseType = 'white';
 let noise = null;
-let oscilloscope = new Oscilloscope();
+let lineColor = "rgb(187, 230, 230)"
+let backgroundColor = "rgb(0, 7, 7)";
+// lineColor = "#00ff04"
+// backgroundColor = "#000a00";
+let oscilloscope = new Oscilloscope(undefined, lineColor, backgroundColor);
 
 playButton.onclick = () => {
   noise = new NoiseGenerator(noiseType);
-  oscilloscope = new Oscilloscope(noise.analyserNode);
+  oscilloscope = new Oscilloscope(noise.analyserNode, lineColor, backgroundColor);
   noise.amplitude = volume.value;
   noise.play();
   oscilloscope.start();

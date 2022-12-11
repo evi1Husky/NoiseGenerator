@@ -42,7 +42,7 @@ class NoiseGenerator {
   }
 
   makeWhiteNoise() {
-    const sampleRate = this.audioContext.sampleRate * 4.0;
+    const sampleRate = this.audioContext.sampleRate * 8.0;
     const buffer =
     this.audioContext.createBuffer(2, sampleRate, this.audioContext.sampleRate);
     for (let channel = 0; channel < 2; channel++) {
@@ -57,7 +57,7 @@ class NoiseGenerator {
   }
 
   makePinkNoise() {
-    const sampleRate = this.audioContext.sampleRate * 4.0;
+    const sampleRate = this.audioContext.sampleRate * 8.0;
     const buffer =
     this.audioContext.createBuffer(2, sampleRate, this.audioContext.sampleRate);
     let b0, b1, b2, b3, b4, b5, b6;
@@ -84,7 +84,7 @@ class NoiseGenerator {
   }
 
   makeBrownianNoise() {
-    const sampleRate = this.audioContext.sampleRate * 4.0;
+    const sampleRate = this.audioContext.sampleRate * 8.0;
     const buffer =
     this.audioContext.createBuffer(2, sampleRate, this.audioContext.sampleRate);
     let lastOut = 0.0;

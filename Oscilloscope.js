@@ -1,13 +1,13 @@
 export default 
 
 class Oscilloscope {
-  constructor(analyserNode) {
+  constructor(analyserNode, lineColor, backgroundColor) {
     this.canvas = document.getElementById("oscilloscope");
     this.canvasContext = this.canvas.getContext("2d");
     this.canvas.width = this.canvas.clientWidth;
     this.canvas.height = this.canvas.clientHeight;
-    this.canvasContext.fillStyle = "#001300";
-    this.canvasContext.strokeStyle = "#00ff04";
+    this.canvasContext.fillStyle = backgroundColor;
+    this.canvasContext.strokeStyle = lineColor;
     this.canvasContext.lineWidth = 1.9;
     this.suspended = true;
     if(analyserNode) {
