@@ -12,6 +12,7 @@ class StaticNoise {
 
     this.imageData =
       this.canvasContext.getImageData(0, 0, this.canvas.width, this.canvas.height);
+    this.imageDataLength = this.imageData.data.length;
 
     this.analyserNode = analyserNode;
     this.numberOfValues = analyserNode.frequencyBinCount;
@@ -21,15 +22,26 @@ class StaticNoise {
   }
 
   start() {
-    this.canvasContext.fillStyle = "rgb(212, 245, 255)"
+    this.canvasContext.fillStyle = "rgb(212, 245, 255)";
     this.suspended = false;
-    this.draw()
+    this.draw();
   }
 
   idle() {
-    this.canvasContext.fillStyle = "rgb(0, 0, 0)"
+    this.canvasContext.fillStyle = "rgb(0, 0, 0)";
     this.suspended = true;
     this.canvasContext.fillRect(0, 0, this.canvas.width, this.canvas.height);
+  }
+
+  findMinimumValue() {
+    let value = 0, min = this.waveformData[0];
+    for (let i = 1; i < this.numberOfValues; i++) {
+      value = this.waveformData[i];
+      if (value < min) {
+        min = value;
+      }
+    }
+    return min;
   }
 
   draw() {
@@ -37,21 +49,20 @@ class StaticNoise {
       window.cancelAnimationFrame(this.draw.bind(this))
       return;
     }
-
     window.requestAnimationFrame(this.draw.bind(this));
 
     this.analyserNode.getByteFrequencyData(this.waveformData);
+    let min = this.findMinimumValue();
 
     let rnd = null;
-    let min = Math.min(...this.waveformData)
-    for (let i = 3; i < this.imageData.data.length; i += 4) {
-      rnd = ~~(Math.random() * (3 - 0) + 0)
+    for (let i = 3; i < this.imageDataLength; i += 4) {
+      rnd = (Math.random() * 3) | 0;
       if ((rnd === 0) || (rnd === 1)) {
         this.imageData.data[i] =
-          this.waveformData[~~(Math.random() * (this.numberOfValues - 0) + 0)]
+          this.waveformData[(Math.random() * this.numberOfValues) | 0];
         this.imageData.data[i] += (this.imageData.data[i] - min) * 3;
-      } else if (rnd === 2) {
-        this.imageData.data[i] = 0
+      } else {
+        this.imageData.data[i] = 0;
       }
     }
     this.canvasContext.putImageData(this.imageData, 0, 0);
