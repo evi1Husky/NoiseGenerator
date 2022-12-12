@@ -1,5 +1,6 @@
-import Oscilloscope from './Oscilloscope.js';
 import NoiseGenerator from './NoiseGenerator.js';
+import Oscilloscope from './Oscilloscope.js';
+import StaticNoise from './StaticNoise.js';
 
 const playButton = document.querySelector('.play-button');
 const stopButton = document.querySelector('.stop-button');
@@ -10,25 +11,28 @@ let noiseType = 'white';
 let noise = null;
 let lineColor = "rgb(187, 230, 230)"
 let backgroundColor = "rgb(0, 7, 7)";
-// lineColor = "#00ff04"
-// backgroundColor = "#000a00";
-let oscilloscope = new Oscilloscope(undefined, lineColor, backgroundColor);
+// let oscilloscope = new Oscilloscope(undefined, lineColor, backgroundColor);
+let staticNoise = null;
 
 playButton.onclick = () => {
   noise = new NoiseGenerator(noiseType);
-  oscilloscope = new Oscilloscope(noise.analyserNode, lineColor, backgroundColor);
+  staticNoise = new StaticNoise(noise.analyserNode)
+  // oscilloscope = new Oscilloscope(noise.analyserNode, lineColor, backgroundColor);
   noise.amplitude = volume.value;
   noise.play();
-  oscilloscope.start();
+  staticNoise.start()
+  // oscilloscope.start();
   playButton.style.display = 'none';
   stopButton.style.display = 'block';
 }
 
 stopButton.onclick = () => {
   noise.stop();
-  oscilloscope.stop();
+  // oscilloscope.stop();
+  staticNoise.idle();
   noise = null;
-  oscilloscope = null;
+  staticNoise = null;
+  // oscilloscope = null;
   playButton.style.display = 'block';
   stopButton.style.display = 'none';
 }

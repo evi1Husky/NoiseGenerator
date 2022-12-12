@@ -41,6 +41,7 @@ canvas {
   border-radius: 1.5rem;
   width: 500px;
   height: 230px;
+  background: black;
 }
 
 button {

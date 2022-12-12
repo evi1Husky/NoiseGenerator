@@ -74,7 +74,7 @@ class NoiseGenerator {
         b5 = -0.7616 * b5 - whiteNoise * 0.0168980;
         buffering[index] =
           b0 + b1 + b2 + b3 + b4 + b5 + b6 + whiteNoise * 0.5362;
-        buffering[index] *= 0.11; // gain compensation
+        buffering[index] *= 0.16; // gain compensation 0.11
         b6 = whiteNoise * 0.115926;
       }
     }
@@ -94,7 +94,7 @@ class NoiseGenerator {
         const whiteNoise = Math.random() * 2 - 1;
         buffering[index] = (lastOut + (0.02 * whiteNoise)) / 1.02;
         lastOut = buffering[index];
-        buffering[index] *= 3.5; // gain compensation
+        buffering[index] *= 4.5; // gain compensation
       }
     }
     const brownianNoise = this.audioContext.createBufferSource();
