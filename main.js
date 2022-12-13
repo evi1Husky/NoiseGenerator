@@ -6,44 +6,57 @@ const playButton = document.querySelector('.play-button');
 const stopButton = document.querySelector('.stop-button');
 const volume = document.querySelector('.volume');
 const noiseButtons = document.querySelectorAll('.noise-button');
+const displayButtons = document.querySelectorAll('.display-button');
 
 let noiseType = 'white';
+let displayType = 'waveform';
 let noise = null;
-let lineColor = "rgb(187, 230, 230)"
-let backgroundColor = "rgb(0, 7, 7)";
-// let oscilloscope = new Oscilloscope(undefined, lineColor, backgroundColor);
-let staticNoise = null;
+let visualizer = new Oscilloscope(undefined);
 
 playButton.onclick = () => {
   noise = new NoiseGenerator(noiseType);
-  staticNoise = new StaticNoise(noise.analyserNode)
-  // oscilloscope = new Oscilloscope(noise.analyserNode, lineColor, backgroundColor);
+  switch (displayType) {
+    case 'waveform':
+      visualizer = new Oscilloscope(noise.analyserNode);
+      break;
+    case 'static':
+      visualizer = new StaticNoise(noise.analyserNode);
+      break;
+  }
   noise.amplitude = volume.value;
   noise.play();
-  staticNoise.start()
-  // oscilloscope.start();
+  visualizer.start();
   playButton.style.display = 'none';
   stopButton.style.display = 'block';
 }
 
 stopButton.onclick = () => {
   noise.stop();
-  // oscilloscope.stop();
-  staticNoise.idle();
+  visualizer.idle();
   noise = null;
-  staticNoise = null;
-  // oscilloscope = null;
+  visualizer = null;
   playButton.style.display = 'block';
   stopButton.style.display = 'none';
 }
 
 for (let button of noiseButtons) {
   button.onclick = () => {
-    noiseType = button.id;
+    noiseType = button.value;
     if (noise) {
       stopButton.click();
       playButton.click();
     }
+  }
+}
+
+for (let button of displayButtons) {
+  button.onclick = () => {
+    displayType = button.value;
+    if (noise) {
+      stopButton.click();
+      playButton.click();
+    }
+    console.log(displayType)
   }
 }
 

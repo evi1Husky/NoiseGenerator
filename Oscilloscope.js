@@ -1,13 +1,13 @@
 export default 
 
 class Oscilloscope {
-  constructor(analyserNode, lineColor, backgroundColor) {
+  constructor(analyserNode) {
     this.canvas = document.getElementById("oscilloscope");
     this.canvasContext = this.canvas.getContext("2d");
     this.canvas.width = this.canvas.clientWidth;
     this.canvas.height = this.canvas.clientHeight;
-    this.canvasContext.fillStyle = backgroundColor;
-    this.canvasContext.strokeStyle = lineColor;
+    this.canvasContext.fillStyle = "rgb(0, 7, 7)";
+    this.canvasContext.strokeStyle = "rgb(187, 230, 230)";
     this.canvasContext.lineWidth = 1.9;
     this.suspended = true;
     if(analyserNode) {
@@ -27,10 +27,6 @@ class Oscilloscope {
     this.canvasContext.stroke();
   }
 
-  stop() {
-    this.suspended = true;
-  }
-
   start() {
     this.suspended = false;
     this.draw()
@@ -39,7 +35,6 @@ class Oscilloscope {
   draw() {
     if (this.suspended) {
       window.cancelAnimationFrame(this.draw.bind(this));
-      this.idle();
       return;
     }
     window.requestAnimationFrame(this.draw.bind(this));

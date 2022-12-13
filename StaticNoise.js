@@ -28,7 +28,7 @@ class StaticNoise {
   }
 
   idle() {
-    this.canvasContext.fillStyle = "rgb(0, 0, 0)";
+    this.canvasContext.fillStyle = "rgb(0, 7, 7)";
     this.suspended = true;
     this.canvasContext.fillRect(0, 0, this.canvas.width, this.canvas.height);
   }
