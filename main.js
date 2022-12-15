@@ -17,8 +17,11 @@ import StaticNoise from './StaticNoise.js';
   let reverb = false;
   let noise = null;
   let visualizer = null;
+  let started = false;
 
   playButton.onclick = () => {
+    turnOnButtonsLightStart();
+    started = true;
     noise = new NoiseGenerator(noiseType, reverb);
     switch (displayType) {
       case 'waveform':
@@ -47,6 +50,8 @@ import StaticNoise from './StaticNoise.js';
   for (let button of noiseButtons) {
     button.onclick = () => {
       noiseType = button.value;
+      buttonsInactive(noiseButtons);
+      buttonActiveLight(button, started);
       if (noise) {
         stopButton.click();
         playButton.click();
@@ -57,6 +62,8 @@ import StaticNoise from './StaticNoise.js';
   for (let button of displayButtons) {
     button.onclick = () => {
       displayType = button.value;
+      buttonsInactive(displayButtons);
+      buttonActiveLight(button, started);
       if (noise) {
         stopButton.click();
         playButton.click();
@@ -76,11 +83,13 @@ import StaticNoise from './StaticNoise.js';
         reverbButton.value = 'on';
         reverbButton.innerText = 'reverb on';
         reverb = true;
+        buttonActiveLight(reverbButton, started);
         break;
         case 'on':
         reverbButton.value = 'off';
         reverbButton.innerText = 'reverb off';
         reverb = false;
+        buttonInactive(reverbButton);
         break;
     }
     if (noise) {
@@ -89,7 +98,41 @@ import StaticNoise from './StaticNoise.js';
     }
   }
 
-  function changeButtonColor(button) {
-
+  function buttonActiveLight(button, started) {
+    if (started) {
+      button.classList.remove('active-button');
+      button.classList.add('active-button');
+    }
   }
+
+  function buttonsInactive(buttons) {
+    for (let button of buttons) {
+      button.classList.remove('active-button');
+    }
+  }
+
+  function buttonInactive(button) {
+    button.classList.remove('active-button');
+  }
+
+  function turnOnButtonsLightStart() {
+    if (!started) {
+      if(reverb) {
+        reverbButton.classList.add('active-button');
+      }
+      for (let noiseButton of noiseButtons) {
+        if (noiseButton.value === noiseType) {
+          noiseButton.classList.add('active-button');
+        }
+      }
+      for (let displayButton of displayButtons) {
+        if (displayButton.value === displayType) {
+          displayButton.classList.add('active-button');
+        }
+      }
+      volume.classList.add('active-slider');
+    }
+  }
+
+  buttonActiveLight(stopButton, true);
 })();

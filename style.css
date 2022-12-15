@@ -34,6 +34,7 @@ main {
 h1 {
   font-size: 2.5rem;
   margin-bottom: 3rem;
+  color: #c1c1c7;
 }
 
 canvas {
@@ -49,7 +50,7 @@ button {
   font-family: 'Andale Mono', monospace, "Arial", sans-serif;
   font-size: 1.6rem;
   font-weight: 800;
-  background-color: #b6b6ba;
+  background-color: #bbbbc1;
   border: none;
 }
 
@@ -57,7 +58,7 @@ input {
   color: #1b1d21;
   font-family: 'Andale Mono', monospace, "Arial", sans-serif;
   appearance: none;
-  background: #b6b6ba;
+  background: #bbbbc1;
   height: 0.3rem;
   border-radius: 1rem;
   border: none;
@@ -73,7 +74,7 @@ input[type="range"]::-webkit-slider-thumb {
   height: 1.3rem;
   width: 1.3rem;
   border-radius: 1rem;
-  background: #b9b9bd;
+  background: #c2c2c6;
   border: none;
 }
 
@@ -84,7 +85,7 @@ input[type="range"]::-moz-range-thumb {
   height: 1.3rem;
   width: 1.3rem;
   border-radius: 1rem;
-  background: #b9b9bd;
+  background: #c2c2c6;
   border: none;
 }
 
@@ -96,10 +97,10 @@ input[type="range"]::-moz-range-thumb {
 .play-button {
   margin-bottom: 3.2rem;
   min-width: 6rem;
-  min-height: 6rem;
+  min-height: 5rem;
   width: 6rem;
-  height: 6rem;
-  border-radius: 50%;
+  height: 5rem;
+  border-radius: 0.6rem;
 }
 
 .volume {
@@ -154,14 +155,39 @@ input::-webkit-slider-thumb:active {
 }
 
 .reverb-button {
-  /* background-color: rgb(255, 124, 135); */
   position: absolute;
   margin-left: 39rem;
   margin-bottom: 16rem;
   font-size: 1.1rem;
   height: 4.2rem;
   width: 4.6rem;
+  min-height: 4.2rem;
   border-radius: 0.6rem;
+}
+
+.active-button {
+  background-color: rgb(255, 105, 125);
+  box-shadow: 0 0 15px 0px rgba(255, 105, 125, 0.655); 
+  color: #24272dc9;
+}
+
+.inactive-button {
+  background-color: #b6b6ba;
+  box-shadow: none; 
+  color: #24272d;
+}
+
+.active-button:hover {
+  background-color: rgb(255, 124, 141);;
+}
+
+.active-button:active {
+  background-color: rgb(255, 141, 156);;
+}
+
+.active-slider:active {
+  background-color: rgb(255, 105, 125);
+  box-shadow: 0 0 15px 0px rgba(255, 105, 125, 0.655);
 }
 
 @media (max-width:420px) {
@@ -188,11 +214,11 @@ input::-webkit-slider-thumb:active {
   .stop-button,
   .play-button {
     margin-top: 2rem;
-    min-width: 7rem;
-    min-height: 7rem;
-    width: 7rem;
-    height: 7rem;
-    border-radius: 7rem;
+    min-width: 6.7rem;
+    min-height: 5.7rem;
+    width: 6.7rem;
+    height: 5.7rem;
+    border-radius: 0.6rem;
   }
 
   .reverb-button {
