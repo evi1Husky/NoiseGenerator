@@ -1,7 +1,7 @@
 export default
 
 class NoiseGenerator {
-  constructor(type) {
+  constructor(type, reverb) {
     this.audioContext = new window.AudioContext();
 
     switch (type) {
@@ -17,14 +17,44 @@ class NoiseGenerator {
     }
 
     this.gainNode = this.audioContext.createGain();
-    this.gainNode.gain.setValueAtTime(0.1, 0);
 
     this.analyserNode = this.audioContext.createAnalyser();
     this.analyserNode.fftSize = 2048;
 
-    this.noise.connect(this.gainNode);
-    this.gainNode.connect(this.audioContext.destination);
-    this.gainNode.connect(this.analyserNode);
+    if (reverb) {
+      this.convolverNode = this.audioContext.createConvolver();
+      this.impulseBuffer = this.impulseResponse(40, 120, false);
+      this.convolverNode.buffer = this.impulseBuffer;
+
+      this.noise.connect(this.convolverNode);
+      this.convolverNode.connect(this.gainNode);
+      this.gainNode.connect(this.audioContext.destination);
+      this.gainNode.connect(this.analyserNode);
+    } else {
+      this.noise.connect(this.gainNode);
+      this.gainNode.connect(this.audioContext.destination);
+      this.gainNode.connect(this.analyserNode);
+    }
+  }
+
+  impulseResponse(duration, decay, reverse) {
+    const sampleRate = this.audioContext.sampleRate;
+    const length = sampleRate * duration;
+    const buffer = this.audioContext.createBuffer(2, length, sampleRate);
+    let n = null;
+    for (let channel = 0; channel < 2; channel++) {
+      const buffering = buffer.getChannelData(channel);
+      for (let i = 0; i < length; i++){
+        n = i;
+        switch (reverse) {
+          case true:
+            n = length - i
+            break;
+        }
+        buffering[i] = (Math.random() * 2 - 1) * Math.pow(1 - n / length, decay);
+      }
+    }
+    return buffer;
   }
 
   play() {
@@ -35,6 +65,7 @@ class NoiseGenerator {
   stop() {
     this.noise.stop();
     this.audioContext.close();
+    this.audioContext = null;
   }
 
   set amplitude(value) {
@@ -74,7 +105,7 @@ class NoiseGenerator {
         b5 = -0.7616 * b5 - whiteNoise * 0.0168980;
         buffering[index] =
           b0 + b1 + b2 + b3 + b4 + b5 + b6 + whiteNoise * 0.5362;
-        buffering[index] *= 0.16; // gain compensation 0.11
+        buffering[index] *= 0.16; // gain compensation
         b6 = whiteNoise * 0.115926;
       }
     }
