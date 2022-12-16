@@ -91,10 +91,10 @@ class NoiseGenerator {
     const sampleRate = this.audioContext.sampleRate * 8.0;
     const buffer =
     this.audioContext.createBuffer(2, sampleRate, this.audioContext.sampleRate);
-    let b0, b1, b2, b3, b4, b5, b6;
-    b0 = b1 = b2 = b3 = b4 = b5 = b6 = 0.0;
     for (let channel = 0; channel < 2; channel++) {
       const buffering = buffer.getChannelData(channel);
+      let b0, b1, b2, b3, b4, b5, b6;
+      b0 = b1 = b2 = b3 = b4 = b5 = b6 = 0.0;
       for (let index = 0; index < sampleRate; index++) {
         const whiteNoise = Math.random() * 2 - 1;
         b0 = 0.99886 * b0 + whiteNoise * 0.0555179;
@@ -118,9 +118,9 @@ class NoiseGenerator {
     const sampleRate = this.audioContext.sampleRate * 8.0;
     const buffer =
     this.audioContext.createBuffer(2, sampleRate, this.audioContext.sampleRate);
-    let lastOut = 0.0;
     for (let channel = 0; channel < 2; channel++) {
       const buffering = buffer.getChannelData(channel);
+      let lastOut = 0.0;
       for (let index = 0; index < sampleRate; index++) {
         const whiteNoise = Math.random() * 2 - 1;
         buffering[index] = (lastOut + (0.02 * whiteNoise)) / 1.02;
